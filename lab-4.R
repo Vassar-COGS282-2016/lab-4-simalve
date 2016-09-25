@@ -71,14 +71,14 @@ plot (pmf16coins)
 
 # here's a quick tip about plot() or hist()
 # if you want to change the range on the x-axis, you can use the xlim argument:
-
+#rbinom(number.of.samples, number.of.trials.per.sample, probability.of.success)
 hist.sample <- rbinom(100, 100, 0.5)
 hist(hist.sample)
 hist(hist.sample, xlim=c(0,100)) # compare this plot to the line above.
 
 hist.sample.two <- pmf16coins
-hist (hist.sample.two)
-hist (hist.sample.two, xlim=c(0,16))
+plot (hist.sample.two)
+plot (hist.sample.two, xlim=c(0,16))
 
 # the normal distribution ##
 
@@ -93,7 +93,7 @@ help(rnorm)
 # then use hist() to create a histogram of these samples.
 
 rnorm(100, mean = 0, sd = 10)
-
+hist (rnorm(100, mean = 0, sd = 10))
 
 # now plot the probability density function of this distribution.
 dnorm(100, mean = 0, sd = 10)
@@ -101,8 +101,8 @@ dnorm(100, mean = 0, sd = 10)
 # distribution with mean 0 and sd 10 for values between -50 and 50. the distribution is continuous
 # so, choose a reasonably small step size between values (remember the seq() function).
 # answer needed here.
-pdf.norm <- dnorm (seq (from = -50, to = 50, by = 5), mean = 0, sd = 10)
-pdf.norm
+pdf.norm <- dnorm (seq (from = -50, to = 50, by = 2), mean = 0, sd = 10)
+plot (pdf.norm)
 
 
 #### practice calculating likelihoods ####
@@ -111,35 +111,26 @@ pdf.norm
 # above. each subject had 20 guesses. the number of correct guesses is reported.
 
 esp.practice.data <- data.frame(subject=1:10, n.correct=c(11,10,6,10,6,12,10,8,9,11))
+plot (esp.practice.data)
 
 # calculate the likelihood (regular, not log) for this data for three different values
 # of the probability of success parameter: 0.4, 0.5, and 0.6.
 # hint: prod() will multiple all elements of a vector together.
-help (mapply)
+#help (mapply)
 #s: help(prod)
 #mega <- c(3, 5, 6)
 #cord <- c(9, 2, 0.3)
 #prod (mega, cord)
+
 # use probability density function for distribution or
-number.of.samples <- 10
-number.of.trials.per.sample <-20
-success.parameter <- c(0.4, 0.5, 0.6)
-likelihood <- rbinom(number.of.samples, number.of.trials.per.sample, success.parameter){
-  rbinom ()
-}
-dbinom(value.to.check, number.of.trials, probability.of.success)
-success.parameter <- c(0.4, 0.5, 0.6)
-dbinom(value.to.check, number.of.trials, probability.of.success)
 # with dbinom, you can use a vector as the first argument, to check the probability
 # of multiple values at the same time:
-
-values <- c(3, 4, 5)
-dbinom(values, 8, 0.5)
-
-
 # which parameter value of those options is most likely?
 
-# answer here.
+n.correct <- c(11,10,6,10,6,12,10,8,9,11)
+prod(dbinom (n.correct, 20, 0.5))
+prod(dbinom (n.correct, 20, 0.4))
+prod(dbinom (n.correct, 20, 0.6))
 
 # here is a sample of response times for a single subject from a rapid decision making experiment.
 rt.sample <- c(391.5845, 411.9970, 358.6373, 505.3099, 616.2892, 481.0751, 422.3132, 511.7213, 205.2692, 522.3433, 370.1850,
