@@ -179,10 +179,28 @@ gcm.practice.data <- data.frame(correct.response = c(T, T, T, T, F, T, T, F, T, 
                                 gcm.probability.correct = c(0.84, 0.80, 0.84, 0.80, 0.79, 0.86, 0.89, 0.87, 0.69, 0.85, 0.75,
                                                             0.74, 0.82, 0.85, 0.87, 0.69, 0.83, 0.87, 0.80, 0.76))
 
-porcupine <- function (mean, sd){mapply (dnorm, gcm.probability.correct, log=T)
-                                  
-  
-}
+loglikely <- function (probcorrect, corrresp){
+  if (correct.response == F){
+    difference <- (1 - gcm.prbability.correct)
+    print (difference)
+    if (correct.response == T){
+      print (gcm.probability.correct)}}
+  return ((log (difference)) + (log (gcm.probability.correct)), gcm.practice.data$loglikely)
+}  
+
+corrresp <- gcm.practice.data$correct.response
+probcorrect <- gcm.practice.data$gcm.probability.correct
+
+print (1 - gcm.practice.data$gcm.probability.correct)
+
+mapply (loglikely (probcorrect, corrresp){
+  if (corrresp == F){
+    print (1 - gcm.practice.data$gcm.probability.correct)}
+  else{
+    print (gcm.practice.data$gcm.probability.correct)}
+  return ((log (1 - gcm.practice.data$probcorrect)) + (log (probcorrect)))}, 
+  gcm.practice.data$gcm.probability.correct) 
+
 
 #### maximum likelihood estimation ####
 
@@ -199,15 +217,23 @@ number.of.samples <- 20
 number.of.trials.per.sample <- 40
 probability.of.success <- seq (from = 0.5, to = 0.9, by = 0.01)
 
-likely$set < - function (theta){
-  if ((theta > 0) && (theta <= 0.9){
+oftheta < - function ((theta){
+  if ((theta >= 0.5) && (theta <= 0.9)){
     probability.of.success <- theta
-    return (dbinom (same.diff.data, 40, probability.of.success))} likely$probability)
-      else (return (NA)) 
-    }
+    return ((dbinom (same.diff.data, 40, (probability.of.success)))}, same.diff.data$probability)
+  i <- probability.of.success
+  i <- i + 0.01
+}) 
 
-   
- likely$set (0.5)  
+
+probability.of.success <- theta
+same.diff.data < - function ((theta){
+  if ((theta >= 0.5) && (theta <= 0.9)){
+    probability.of.success <- theta
+    return ((dbinom (same.diff.data, 40, (probability.of.success))), same.diff.data$probability)}
+)}
+
+oftheta (0.5)  
 
 # then use sapply to run the function for each possible value of theta in the set. use seq() to generate the
 # set of possible values. plot the set of values on the x axis and the corresponding likelihoods on the y axis.
